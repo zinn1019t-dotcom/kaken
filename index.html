@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPIKE Prime Portal | 名護商工 情報科</title>
+    <title>SPIKE Support Portal | 名護商工</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -11,50 +11,30 @@
 
     <header>
         <div class="container">
-            <h1><span class="tech-text">NAGO SHOKO</span> SPIKE Lab</h1>
+            <h1><span class="tech-text">NAGO SHOKO</span><br>SPIKE Support Portal</h1>
             <p>名護商工 総合情報科 プログラミング教室</p>
         </div>
     </header>
 
     <main class="container">
-        
-        <section class="mission-section">
-            <h2><span class="icon">🚀</span> 本日のミッション</h2>
-            <div class="card mission-card">
-                <h3>障害物をよけてゴールを目指せ！</h3>
-                <p>カラーセンサーと超音波センサーを使いこなして、コースを完走しよう。</p>
-            </div>
-        </section>
-
-        <section class="hint-section">
-            <h2><span class="icon">🛠️</span> Debug Guide (ヒント)</h2>
-            <div class="grid">
-                <div class="card hint-item">
-                    <h4>まっすぐ走らない！</h4>
-                    <p>左右のパワー（％）が同じ数字になっているかチェックしてみよう。</p>
-                </div>
-                <div class="card hint-item">
-                    <h4>センサーが反応しない</h4>
-                    <p>ハブのポート（A～F）に正しくささっているかな？</p>
-                </div>
-                <div class="card hint-item">
-                    <h4>途中で止まっちゃう</h4>
-                    <p>電池（バッテリー）の残量が赤くなっていないかな？</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="survey-section">
-            <a href="YOUR_GOOGLE_FORMS_URL" class="btn-survey">
-                アンケートに答える（ふりかえり）
+        <div class="menu-grid">
+            <a href="hint.html" class="menu-card">
+                <div class="icon">🛠️</div>
+                <h3>デバッグ・ヒント</h3>
+                <p>プログラムがうまく動かないときはここを確認！</p>
             </a>
-        </section>
 
+            <a href="YOUR_GOOGLE_FORMS_URL" class="menu-card survey-card">
+                <div class="icon">📝</div>
+                <h3>ふりかえりアンケート</h3>
+                <p>今日の学習が終わったら、ここから教えてね。</p>
+            </a>
+        </div>
     </main>
 
     <footer>
-        <p></p>
-        <p class="version">System Version 1.0.0 | Managed by GitHub</p>
+        <p>Dev Team: Nago Shoko IT Course</p>
+        <p class="version">System Version 1.1.0</p>
     </footer>
 
 </body>
