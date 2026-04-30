@@ -1,58 +1,78 @@
 :root {
-    --shoko-green: #00873c;
-    --shoko-blue: #87ceeb;
-    --dark: #1a1a1a;
-    --hud-bg: #0a0e0a;
-    --monitor-frame: #2c2c2c; /* モニターのプラスチック枠の色 */
+    --shoko-green: #00873c;   /* 情報科グリーン */
+    --shoko-blue: #87ceeb;    /* 制服水色 */
+    --dark: #1a1a1a;          /* カード文字色 */
+    --hud-bg: #0a0e0a;        /* 液晶の背景（深い黒） */
+    --monitor-frame: #333;    /* モニターの枠の色 */
 }
 
-/* 1. モニターの「外側の空間」を設定 */
+/* 1. モニターの外枠（ベゼル）の設定 */
 body {
     margin: 0;
-    padding: 25px; /* モニターの枠を作るための隙間 */
-    background-color: #000; /* モニターの外は真っ暗 */
+    padding: 20px; /* モニターの枠の厚み */
+    background-color: #000; /* モニターの外側は真っ暗 */
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* 2. モニターの「枠（ベゼル）」と「液晶画面」 */
-.monitor-screen {
-    flex: 1;
-    border: 12px solid var(--monitor-frame); /* モニターの太い枠 */
+/* 2. モニター内部（液晶画面）の設定 */
+/* HTML側に <div class="monitor-screen"> を追加しない場合、
+   このスタイルを main や header を包むコンテナとして使う */
+body::before {
+    content: "";
+    position: fixed;
+    top: 20px; bottom: 20px; left: 20px; right: 20px;
+    border: 10px solid var(--monitor-frame);
     border-radius: 15px;
-    background-color: var(--hud-bg);
-    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                      linear-gradient(90deg, rgba(0, 255, 102, 0.02), rgba(0, 217, 255, 0.02));
-    background-size: 100% 4px, 4px 100%;
-    overflow-y: auto; /* コンテンツが長い時は画面内だけでスクロール */
-    position: relative;
-    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0,0,0,0.8);
-    display: flex;
-    flex-direction: column;
+    pointer-events: none;
+    z-index: 999;
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
 }
 
-/* 3. ヘッダーをモニター内に配置 */
+/* 画面内のメイン背景 */
+main, header, footer {
+    background-color: var(--hud-bg);
+}
+
+/* ヘッダー：モニターの上部に固定 */
 header {
     background-color: var(--shoko-green);
     color: white;
     padding: 40px 20px;
     text-align: center;
     border-bottom: 8px solid var(--shoko-blue);
-    /* モニターの端に合わせるためmarginは0 */
+    margin: 0;
 }
 
-.tech-text { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; color: var(--shoko-blue); }
+.tech-text { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 1.5rem; 
+    color: var(--shoko-blue); 
+}
 
-/* 4. メニューカードの配置を調整 */
+/* 液晶の走査線エフェクト */
+body::after {
+    content: "";
+    position: fixed;
+    top: 30px; left: 30px; right: 30px; bottom: 30px;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 998;
+    opacity: 0.3;
+}
+
+/* 3. カードの配置調整（水色に被らないよう margin-top をプラスに） */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    padding: 60px 40px; /* 水色の線からしっかり離して中央に配置 */
-    margin: 0 auto;
+    padding: 60px 20px; /* 上下の余白を広げて中央に寄せる */
     max-width: 900px;
+    margin: 0 auto;
 }
 
 .menu-card {
@@ -64,19 +84,25 @@ header {
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     transition: 0.3s;
+    border: 3px solid transparent;
 }
 
 .menu-card:hover {
     transform: translateY(-5px);
+    border-color: var(--shoko-blue);
     box-shadow: 0 0 20px var(--shoko-blue);
 }
 
-/* フッターもモニター内に収める */
+.survey-card { border-bottom: 8px solid var(--shoko-green); }
+.icon { font-size: 3rem; margin-bottom: 10px; }
+
+/* フッター：モニターの底部に配置 */
 footer {
     text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    color: #666;
-    border-top: 1px solid var(--shoko-green);
+    padding: 30px;
     margin-top: auto;
+    border-top: 1px solid #333;
+    color: #555;
 }
+
+.version { font-family: 'JetBrains Mono', monospace; }
