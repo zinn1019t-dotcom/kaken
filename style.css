@@ -1,16 +1,16 @@
 :root {
-    --shoko-green: #00873c;   /* 情報科グリーン */
-    --shoko-blue: #87ceeb;    /* 制服水色 */
-    --dark: #1a1a1a;          /* カード文字色 */
-    --hud-bg: #0a0e0a;        /* 液晶の背景（深い黒） */
-    --monitor-frame: #333;    /* モニターの枠の色 */
+    --shoko-green: #00873c;
+    --shoko-blue: #87ceeb;
+    --dark-text: #222;
+    --monitor-bg: #1a1e1a; /* 真っ黒をやめて、少し目に優しい深緑グレーに */
+    --monitor-frame: #333;
 }
 
-/* 1. モニターの外枠（ベゼル）の設定 */
+/* モニター全体のガワ */
 body {
     margin: 0;
-    padding: 20px; /* モニターの枠の厚み */
-    background-color: #000; /* モニターの外側は真っ暗 */
+    padding: 15px; /* 枠を少し細くして画面を広く */
+    background-color: #111;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,91 +18,76 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-/* 2. モニター内部（液晶画面）の設定 */
-/* HTML側に <div class="monitor-screen"> を追加しない場合、
-   このスタイルを main や header を包むコンテナとして使う */
-body::before {
-    content: "";
-    position: fixed;
-    top: 20px; bottom: 20px; left: 20px; right: 20px;
-    border: 10px solid var(--monitor-frame);
-    border-radius: 15px;
-    pointer-events: none;
-    z-index: 999;
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+/* 液晶画面の中身 */
+.monitor-screen {
+    flex: 1;
+    border: 8px solid var(--monitor-frame);
+    border-radius: 12px;
+    background-color: var(--monitor-bg);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
 }
 
-/* 画面内のメイン背景 */
-main, header, footer {
-    background-color: var(--hud-bg);
-}
-
-/* ヘッダー：モニターの上部に固定 */
+/* ヘッダー：色はそのまま、文字を読みやすく */
 header {
     background-color: var(--shoko-green);
     color: white;
-    padding: 40px 20px;
+    padding: 30px 20px; /* 少しスリムに */
     text-align: center;
-    border-bottom: 8px solid var(--shoko-blue);
-    margin: 0;
+    border-bottom: 6px solid var(--shoko-blue);
 }
 
 .tech-text { 
     font-family: 'JetBrains Mono', monospace; 
-    font-size: 1.5rem; 
-    color: var(--shoko-blue); 
+    font-size: 1.4rem; 
+    letter-spacing: 2px;
 }
 
-/* 液晶の走査線エフェクト */
-body::after {
-    content: "";
-    position: fixed;
-    top: 30px; left: 30px; right: 30px; bottom: 30px;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
-    z-index: 998;
-    opacity: 0.3;
-}
-
-/* 3. カードの配置調整（水色に被らないよう margin-top をプラスに） */
+/* メニューカードの配置：水色からしっかり離す */
 .menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex; /* gridより中央寄せしやすいflexに変更 */
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
-    padding: 60px 20px; /* 上下の余白を広げて中央に寄せる */
-    max-width: 900px;
+    padding: 80px 20px; /* 上の余白をたっぷり取る（水色から離す） */
+    max-width: 1000px;
     margin: 0 auto;
 }
 
+/* カード本体：見やすさ重視 */
 .menu-card {
-    background: white;
+    background: #ffffff;
+    width: 320px;
     padding: 40px 20px;
     text-align: center;
     text-decoration: none;
-    color: var(--dark);
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    transition: 0.3s;
-    border: 3px solid transparent;
+    color: var(--dark-text);
+    border-radius: 20px;
+    /* 影を「黒」ではなく「水色の光」にして視認性アップ */
+    box-shadow: 0 0 20px rgba(135, 206, 235, 0.2); 
+    transition: transform 0.2s;
+    border: 2px solid transparent;
 }
 
 .menu-card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05);
     border-color: var(--shoko-blue);
-    box-shadow: 0 0 20px var(--shoko-blue);
+    box-shadow: 0 0 30px rgba(135, 206, 235, 0.5);
 }
 
-.survey-card { border-bottom: 8px solid var(--shoko-green); }
-.icon { font-size: 3rem; margin-bottom: 10px; }
+.icon { font-size: 3.5rem; margin-bottom: 15px; }
 
-/* フッター：モニターの底部に配置 */
+h3 { margin: 10px 0; font-size: 1.5rem; }
+
+p { font-size: 1rem; color: #555; line-height: 1.5; }
+
+/* フッター */
 footer {
     text-align: center;
-    padding: 30px;
+    padding: 20px;
+    color: #666;
+    font-size: 0.8rem;
     margin-top: auto;
-    border-top: 1px solid #333;
-    color: #555;
 }
-
-.version { font-family: 'JetBrains Mono', monospace; }
