@@ -1,0 +1,136 @@
+:root {
+    --shoko-green: #00873c;   /* 情報科グリーン */
+    --shoko-blue: #87ceeb;    /* 制服水色 */
+    --bg-color: #2b2f32;      /* 背景：目に優しいダークグレー */
+    --card-bg: #fdfdfd;      /* カード：真っ白すぎない白 */
+    --text-main: #333;       /* 文字：濃いグレー */
+}
+
+/* 1. 全体設定：枠をなくして画面いっぱいに */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: #eee;
+    font-family: 'Noto Sans JP', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 2. ヘッダー：画面上端に固定 */
+header {
+    background-color: var(--shoko-green);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-bottom: 8px solid var(--shoko-blue);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.tech-text { 
+    font-family: 'JetBrains Mono', monospace; 
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+/* 3. コンテンツエリア */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* メインメニューの配置（水色から離す） */
+.menu-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 80px 0; /* ヘッダーからしっかり距離をとる */
+}
+
+/* ヒントリストの配置 */
+.hint-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 60px 0;
+}
+
+/* 4. カードデザイン */
+.menu-card, .card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    color: var(--text-main);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-decoration: none;
+    transition: 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* トップ用 */
+.menu-card {
+    width: 320px;
+    padding: 45px 25px;
+    text-align: center;
+}
+
+/* ヒント用 */
+.card {
+    padding: 30px;
+    border-left: 10px solid var(--shoko-green);
+}
+
+.menu-card:hover, .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* CODEラベル */
+.code-label {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    background: #444;
+    color: var(--shoko-blue);
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+/* 5. パーツ・ボタン類 */
+.icon { font-size: 4rem; margin-bottom: 15px; }
+
+h3 { margin: 10px 0; font-size: 1.6rem; color: #111; }
+
+p { font-size: 1.1rem; color: #444; line-height: 1.6; }
+
+.action-area { text-align: center; padding: 40px 0; }
+
+.btn-back {
+    display: inline-block;
+    background-color: var(--shoko-blue);
+    color: #111;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-back:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+/* 6. フッター */
+footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: auto;
+    background-color: rgba(0,0,0,0.1);
+    color: #999;
+}
